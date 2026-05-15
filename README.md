@@ -25,14 +25,14 @@ The `xtivdml` estimates the structural (causal) parameter from panel data models
   Y_{it} =  \big\{D_{it}- r_0( X_{it})\big\} \theta_0 + l_0(X_{it}) + \alpha_i + U_{it}
 ```
 ```math  
-  D_{it} =  \mathbf{V}_{it}'\pi_0 + r_0(X_{it}) + \zeta_i + R_{it},
+  D_{it} =  \mathbf{V}_{it}'\mathbf{\pi}_0 + r_0(X_{it}) + \zeta_i + R_{it},
 ```
 ```math  
-  Z_{it} =  m_0(X_{it}) + \gamma_i  + V_{it},
+  Z_{it} =  \mathbf{m}_0(X_{it}) + \gamma_i  + \mathbf{V}_{it},
 ```
 
 where 
-  * $Y_{it}$ is the output, $D_{it}$ an endogenous treatment, $\mathbf{Z}_{it}$ a set of valid instruments, and$X_{it}$ the covariates
+  * $Y_{it}$ is the output, $D_{it}$ an endogenous treatment,  $Z_{it}$ a set of valid instruments, and $X_{it}$ the covariates
   * $(l_0, r_0, \mathbf{m}_0)$ are (possibly nonlinear) nuisance functions to *learn* 
   * $(\theta_0, \pi_0)$ are the parameters to *estimate* 
   * ($\alpha_i, \zeta_i, \gamma_i$) are the unobserved individual heterogeneity correlated with the included covariates;
@@ -87,11 +87,7 @@ obj_xtivdml_data = xtivdml_data_from_data_frame(df,
                  y_col = "y",
                  d_cols = "d",
                  z_cols = "z",
-                 panel_id = "id",
-                 time_id = "time",
-                 cluster_cols = "id",
-                 approach = "fd-exact",
-                 transformX = "no")
+                 cluster_cols = "id")
 
 # Print data environment
 obj_xtivdml_data$print()
